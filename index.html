@@ -1,109 +1,185 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8">
-  <title>Cyber Guardian</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #000;
-      color: #00ff9d;
-      text-align: center;
-    }
-
-    header {
-      padding: 40px 20px;
-    }
-
-    h1 {
-      font-size: 2.8rem;
-      text-shadow: 0 0 10px #00ff9d;
-    }
-
-    p {
-      color: #baffea;
-      font-size: 1.1rem;
-    }
-
-    .card {
-      background: #0a0a0a;
-      border: 1px solid #00ff9d;
-      border-radius: 12px;
-      padding: 20px;
-      margin: 20px auto;
-      max-width: 800px;
-      box-shadow: 0 0 15px #00ff9d22;
-      text-align: left;
-    }
-
-    h2 {
-      color: #00ff9d;
-    }
-
-    ul {
-      color: #baffea;
-      line-height: 1.6;
-    }
-
-    .warning {
-      color: #ff4d4d;
-      font-weight: bold;
-    }
-
-    .footer {
-      margin-top: 40px;
-      font-size: 0.9rem;
-      color: #666;
-      padding-bottom: 20px;
-    }
-  </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"/>
+<title>Cyber Guardian — Segurança Digital</title>
+<meta name="description" content="Aprenda sobre superexposição online e como proteger seus dados nas redes sociais."/>
+<link rel="icon" href="assets/favicon.svg"/>
+<link rel="stylesheet" href="shared.css"/>
+<link rel="stylesheet" href="style.css"/>
 </head>
 <body>
 
-  <header>
-    <h1>🔐 Cyber Guardian</h1>
-    <p>Conscientização sobre segurança digital</p>
-  </header>
+<div id="susto"><div id="susto-inner">
+  <div id="susto-alerta">⚠️</div>
+  <h1 id="susto-titulo">ATENÇÃO</h1>
+  <p id="susto-texto">Sua conexão está sendo monitorada...</p>
+  <div id="susto-barra-container"><div id="susto-barra"></div></div>
+  <p id="susto-sub">( simulação educativa — Cyber Guardian )</p>
+</div></div>
 
-  <div class="card">
-    <h2>📡 O que é superexposição na internet?</h2>
-    <p>
-      Superexposição na internet é quando uma pessoa compartilha ou deixa expostos
-      muitos dados pessoais online, como fotos, localização, informações privadas
-      e hábitos do dia a dia.
-    </p>
+<canvas id="matrix"></canvas>
+
+<nav class="nav"><div class="nav-inner">
+  <a class="brand" href="index.html"><img src="assets/logo.svg" alt="logo"/><span>CYBER GUARDIAN</span></a>
+  <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  <div class="links">
+    <a href="index.html" class="active">Início</a>
+    <a href="conscientizacao.html">⚠️ Riscos</a>
+    <a href="timeline.html">📅 Histórico</a>
+    <a href="quiz.html">🎮 Quiz</a>
+    <a href="senha.html">🔑 Senha</a>
+    <a href="vocabulario.html">📖 Vocabulário</a>
+    <a href="ia.html">🤖 IA</a>
+    <a href="logs.html">📡 Logs</a>
+    <a href="referencias.html">📚 Fontes</a>
+    <button id="theme-toggle">☀️ Light</button>
+    <button id="sound-toggle">🔇</button>
   </div>
+</div></nav>
 
-  <div class="card">
-    <h2>⚠️ Principais perigos</h2>
-    <ul>
-      <li>Roubo de identidade</li>
-      <li>Golpes e fraudes (phishing)</li>
-      <li>Perseguição virtual (stalking)</li>
-      <li>Uso indevido de fotos e dados</li>
-      <li>Exposição de localização em tempo real</li>
-    </ul>
+<header class="hero">
+  <div class="hero-badge">🛡️ Projeto Educativo · Ensino Médio · 2026</div>
+  <h1 id="typing" class="glitch-text"></h1>
+  <p class="hero-sub">Tudo que você posta pode ser usado contra você — e a maioria das pessoas nem sabe disso.</p>
+  <div class="actions">
+    <button class="btn primary" onclick="document.getElementById('info').scrollIntoView({behavior:'smooth'})">Explorar ↓</button>
+    <a href="quiz.html"><button class="btn outline">🎮 Fazer o Quiz</button></a>
+    <a href="conscientizacao.html"><button class="btn blue">⚠️ Ver os Riscos</button></a>
   </div>
+  <div class="visitantes-badge">👁️ Visitantes hoje: <span id="visitantes-count">...</span></div>
+</header>
 
-  <div class="card">
-    <h2>🛡️ Como se proteger</h2>
-    <ul>
-      <li>Não compartilhar localização em tempo real</li>
-      <li>Evitar postar dados pessoais (endereço, documentos)</li>
-      <li>Usar senhas fortes e autenticação em duas etapas</li>
-      <li>Revisar configurações de privacidade</li>
-      <li>Pensar antes de postar qualquer coisa</li>
-    </ul>
+<div class="sabia-bar">
+  <span class="sabia-label">💡 SABIA QUE</span>
+  <span class="sabia-texto" id="sabia-texto"></span>
+</div>
+
+<!-- O QUE É -->
+<section id="info" class="section">
+  <h2>O que é superexposição?</h2>
+  <p style="font-size:clamp(14px,2vw,16px);line-height:1.8;color:var(--text2)">
+    Sabe quando você posta uma foto mostrando onde está, marca seu amigo numa foto da festa antes de chegar em casa, ou aceita seguidor desconhecido só porque tem foto de perfil bonitinha?
+    <br><br>
+    Isso é superexposição. É quando a gente compartilha informações demais — sem pensar nas consequências.
+    <br><br>
+    O problema é que essas informações ficam lá para sempre. Qualquer pessoa pode capturar, salvar, compartilhar. E uma vez na internet,
+    <strong style="color:var(--red)">você perde o controle pra sempre.</strong>
+  </p>
+</section>
+
+<!-- CONTADOR -->
+<section id="contador" class="section">
+  <h2>Dados vazados <span style="color:var(--red)">hoje</span> no mundo</h2>
+  <p style="color:var(--text2);margin-bottom:30px;font-size:clamp(12px,1.8vw,14px)">Estimativa baseada em dados reais · Surfshark Q3/2024 · ITRC 2024</p>
+  <div class="contador-box">
+    <div id="contador-numero">0</div>
+    <div class="contador-label">registros expostos hoje</div>
   </div>
-
-  <div class="card warning">
-    ⚠️ Lembre-se: tudo que vai pra internet pode ser copiado e nunca mais apagado completamente.
+  <div class="contador-stats">
+    <div class="stat-item"><span class="stat-num" id="stat-brasil">0</span><span class="stat-label">no Brasil hoje</span></div>
+    <div class="stat-item"><span class="stat-num" id="stat-seg">54</span><span class="stat-label">por segundo</span></div>
+    <div class="stat-item"><span class="stat-num" id="stat-ano">1,1 bi</span><span class="stat-label">casos em 2024</span></div>
   </div>
+</section>
 
-  <div class="footer">
-    Cyber Guardian © Projeto educativo sobre segurança digital
+<!-- LOGS -->
+<section class="section">
+  <div class="logs-header">
+    <span style="color:var(--green);font-family:var(--font-title);font-size:13px">🔎 LOGS EM TEMPO REAL</span>
+    <span class="logs-live">● AO VIVO</span>
+    <a href="logs.html" style="color:var(--blue);font-size:12px;text-decoration:none;margin-left:auto">Ver tudo →</a>
   </div>
+  <ul id="logs"></ul>
+</section>
 
-</body>
-</html>
+<!-- EXPLORE MAIS -->
+<section class="section" style="text-align:center">
+  <h2>Explore o Cyber Guardian</h2>
+  <p style="color:var(--text2);margin-bottom:clamp(16px,3vw,30px);font-size:clamp(12px,1.8vw,14px)">Tem muito mais pra você aqui</p>
+  <div class="cards" style="text-align:left">
+    <a href="conscientizacao.html" style="text-decoration:none"><div class="card card-link" style="border-left-color:var(--red)">
+      <h3>⚠️ Tela de Conscientização</h3><p>Entenda de verdade os riscos da exposição online com exemplos reais e diretos.</p>
+      <span class="card-arrow">→</span>
+    </div></a>
+    <a href="quiz.html" style="text-decoration:none"><div class="card card-link" style="border-left-color:var(--green)">
+      <h3>🎮 Quiz — Você seria hackeado?</h3><p>Responda perguntas sobre seus hábitos e veja seu nível de risco. Tem ranking!</p>
+      <span class="card-arrow">→</span>
+    </div></a>
+    <a href="timeline.html" style="text-decoration:none"><div class="card card-link" style="border-left-color:var(--yellow)">
+      <h3>📅 Linha do Tempo</h3><p>Os maiores vazamentos de dados da história — desde 2006 até hoje.</p>
+      <span class="card-arrow">→</span>
+    </div></a>
+    <a href="senha.html" style="text-decoration:none"><div class="card card-link" style="border-left-color:#8888ff">
+      <h3>🔑 Teste sua Senha</h3><p>Descubra se sua senha é forte ou se um hacker quebraria ela em segundos.</p>
+      <span class="card-arrow">→</span>
+    </div></a>
+    <a href="vocabulario.html" style="text-decoration:none"><div class="card card-link" style="border-left-color:var(--blue)">
+      <h3>📖 Vocabulário Hacker</h3><p>Phishing, ransomware, VPN... entenda o que esses termos significam de verdade.</p>
+      <span class="card-arrow">→</span>
+    </div></a>
+    <a href="ia.html" style="text-decoration:none"><div class="card card-link" style="border-left-color:#00ccff">
+      <h3>🤖 IA de Segurança</h3><p>Pergunte qualquer coisa sobre segurança digital — resposta na hora.</p>
+      <span class="card-arrow">→</span>
+    </div></a>
+    <a href="logs.html" style="text-decoration:none"><div class="card card-link" style="border-left-color:var(--green)">
+      <h3>📡 Logs & Visitantes</h3><p>Veja em tempo real quem está acessando e de onde — isso é o que sites coletam de você.</p>
+      <span class="card-arrow">→</span>
+    </div></a>
+    <a href="referencias.html" style="text-decoration:none"><div class="card card-link" style="border-left-color:#aaa">
+      <h3>📚 Fontes e Referências</h3><p>Todas as estatísticas e dados usados neste projeto com links para verificar.</p>
+      <span class="card-arrow">→</span>
+    </div></a>
+  </div>
+</section>
+
+<!-- CRÉDITOS -->
+<section id="creditos" class="section">
+  <h2>Créditos</h2>
+  <div class="creditos-container">
+    <div class="credito-item"><span class="credito-emoji">💻</span>
+      <div><strong>Lucas Passos</strong><br><span style="color:var(--text2);font-size:13px">Programador Principal — Criou o site, Firebase e animações.</span></div>
+    </div>
+    <div class="credito-item"><span class="credito-emoji">🔧</span>
+      <div><strong>Gabriel Maia</strong><br><span style="color:var(--text2);font-size:13px">Auxiliar Técnico — Ajudou no código e correções.</span></div>
+    </div>
+    <div class="credito-item"><span class="credito-emoji">🧪</span>
+      <div><strong>Gustavo Henrique</strong><br><span style="color:var(--text2);font-size:13px">Tester — Testou e encontrou erros.</span></div>
+    </div>
+  </div>
+</section>
+
+<div id="consentimento" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);backdrop-filter:blur(8px);z-index:9999;display:none;align-items:center;justify-content:center;padding:20px">
+  <div class="consentimento-box">
+    <div style="font-size:48px;margin-bottom:12px">🔐</div>
+    <h2>⚠️ CONSENTIMENTO</h2>
+    <p>Este site pode coletar seu <strong>IP e localização aproximada</strong> para fins educativos. Os dados ficam visíveis nos logs em tempo real.</p>
+    <p style="color:#555;font-size:12px;margin-top:8px">Se recusar, nenhum dado seu é coletado.</p>
+    <div class="consent-btns">
+      <button class="btn primary" onclick="aceitar()">✅ Aceitar</button>
+      <button class="btn outline" onclick="recusar()">❌ Recusar</button>
+    </div>
+  </div>
+</div>
+
+<div id="loading" style="display:none;position:fixed;inset:0;background:#000;color:var(--red);font-size:30px;text-align:center;padding-top:20%;z-index:999;font-family:var(--font-title);letter-spacing:4px">ACESSANDO SISTEMA...</div>
+<div id="popup" style="display:none;position:fixed;top:40%;left:50%;transform:translate(-50%,-50%);background:var(--red);color:#fff;padding:20px 32px;border-radius:10px;box-shadow:0 0 30px var(--red);z-index:500;font-weight:bold;font-family:var(--font-title)">⚠️ ISSO FOI UMA SIMULAÇÃO ⚠️</div>
+<audio id="hackSound" src="assets/type.wav"></audio>
+
+<footer>
+  <p>Cyber Guardian © 2026 &nbsp;|&nbsp;
+    <a href="index.html">Início</a>
+    <a href="quiz.html">Quiz</a>
+    <a href="vocabulario.html">Vocabulário</a>
+    <a href="logs.html">Logs</a>
+    <a href="referencias.html">Fontes</a>
+  </p>
+  <p style="margin-top:8px;font-size:11px;color:#333">↑↑↓↓←→←→BA · Segredo 🕹️</p>
+</footer>
+
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+<script src="shared.js"></script>
+<script src="script.js"></script>
+</body></html>
